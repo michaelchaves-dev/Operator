@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "default_market": "ne-housing",
+  "markets": [
+    {
+      "id": "ne-housing",
+      "label": "MarciAi New England",
+      "countries": ["US"],
+      "regions": ["MA", "NH", "ME", "VT", "CT", "RI"],
+      "languages": ["en"],
+      "languages_planned": ["es"],
+      "officer": "marci",
+      "max_tier": 1,
+      "human_gate_on": ["notice", "pms-write", "eviction", "deposit-decision"],
+      "register": "michaelchaves-dev/New_England_Real-Estate_Compliance_Law",
+      "disclaimer": "Not legal advice. Draft only. Named human signs."
+    }
+  ]
+}
