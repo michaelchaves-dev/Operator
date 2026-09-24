@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "default_project": null,
+  "projects": [
+    {
+      "id": "bellaos",
+      "aliases": ["bellaOS", "bella-os"],
+      "label": "bellaOS",
+      "adapters": { "github": null },
+      "notes": "Core OS / agent plane. Wire repo when ready."
+    },
+    {
+      "id": "zali",
+      "aliases": ["zali", "zali-os", "zali-rag"],
+      "label": "Zali",
+      "adapters": { "github": null },
+      "notes": "Retrieval / RAG experiments."
+    },
+    {
+      "id": "subtractoken",
+      "aliases": ["SubtracToken", "subtractoken"],
+      "label": "SubtracToken",
+      "adapters": { "github": null },
+      "notes": "Router product."
+    },
+    {
+      "id": "aim",
+      "aliases": ["AIM", "ai-inference-market"],
+      "label": "AIM",
+      "adapters": { "github": null },
+      "notes": "AI Inference Market / Well Spoken Token."
+    },
+    {
+      "id": "commons",
+      "aliases": ["commons", "bellaOS-Commons"],
+      "label": "Commons",
+      "adapters": { "github": "michaelchaves-dev/bellaOS-Commons" },
+      "notes": "Shared board. Confirm repo name before write paths."
+    },
+    {
+      "id": "operator",
+      "aliases": ["operator", "control-line"],
+      "label": "Operator",
+      "adapters": { "github": "michaelchaves-dev/Operator" },
+      "notes": "This plane."
+    }
+  ]
+}

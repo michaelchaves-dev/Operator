@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "default_agent": "bella",
+  "agents": [
+    {
+      "id": "bella",
+      "aliases": ["operator", "desk"],
+      "role": "router / desk",
+      "projects": ["*"],
+      "max_tier": 1,
+      "tools": ["status", "handoff", "list-agents"],
+      "write": false,
+      "deploy": false,
+      "merge": false
+    },
+    {
+      "id": "twin",
+      "aliases": ["twin"],
+      "role": "inspect / compare",
+      "projects": ["zali", "aim", "operator", "bellaos"],
+      "max_tier": 1,
+      "tools": ["status", "inspect", "compare", "benchmark-read"],
+      "write": false,
+      "deploy": false,
+      "merge": false
+    },
+    {
+      "id": "coder",
+      "aliases": ["coder", "patch"],
+      "role": "branch / proposed patch",
+      "projects": ["zali", "aim", "subtractoken", "operator", "bellaos"],
+      "max_tier": 2,
+      "tools": ["status", "issue", "branch", "propose-patch"],
+      "write": "branch-only",
+      "deploy": false,
+      "merge": false
+    },
+    {
+      "id": "security",
+      "aliases": ["security", "sentinel"],
+      "role": "review",
+      "projects": ["bellaos", "zali", "subtractoken", "operator"],
+      "max_tier": 1,
+      "tools": ["status", "inspect", "create-issue"],
+      "write": "security-folder-only",
+      "deploy": false,
+      "merge": false
+    },
+    {
+      "id": "research",
+      "aliases": ["research"],
+      "role": "lookup / compare vendors",
+      "projects": ["aim", "zali", "bellaos"],
+      "max_tier": 1,
+      "tools": ["status", "research"],
+      "write": false,
+      "deploy": false,
+      "merge": false
+    },
+    {
+      "id": "deploy",
+      "aliases": ["deploy"],
+      "role": "ship",
+      "projects": ["aim", "operator"],
+      "max_tier": 3,
+      "tools": ["status", "staging", "production"],
+      "write": false,
+      "deploy": "approval-required",
+      "merge": false
+    },
+    {
+      "id": "commons",
+      "aliases": ["commons", "log"],
+      "role": "board / log",
+      "projects": ["commons"],
+      "max_tier": 1,
+      "tools": ["status", "log"],
+      "write": "log-only",
+      "deploy": false,
+      "merge": false
+    }
+  ]
+}
