@@ -1,12 +1,18 @@
 {
-  "version": 1,
+  "version": 2,
   "default_project": null,
+  "seat_policy": "reassign",
+  "queue": ["zali", "aim", "subtractoken", "bellaos", "operator"],
   "projects": [
     {
       "id": "bellaos",
       "aliases": ["bellaOS", "bella-os"],
       "label": "bellaOS",
       "adapters": { "github": null },
+      "officer": "bella",
+      "baseline": "active",
+      "next": "operator",
+      "charter": ["scan", "report", "1pct", "launch"],
       "notes": "Core OS / agent plane. Wire repo when ready."
     },
     {
@@ -14,13 +20,21 @@
       "aliases": ["zali", "zali-os", "zali-rag"],
       "label": "Zali",
       "adapters": { "github": null },
-      "notes": "Retrieval / RAG experiments."
+      "officer": "twin",
+      "baseline": "active",
+      "next": "aim",
+      "charter": ["scan", "report", "1pct", "launch"],
+      "notes": "Retrieval / RAG experiments. Seat motivation: Zali-style 1% daily."
     },
     {
       "id": "subtractoken",
       "aliases": ["SubtracToken", "subtractoken"],
       "label": "SubtracToken",
       "adapters": { "github": null },
+      "officer": "coder",
+      "baseline": "active",
+      "next": "zali",
+      "charter": ["scan", "report", "1pct", "launch"],
       "notes": "Router product."
     },
     {
@@ -28,6 +42,10 @@
       "aliases": ["AIM", "ai-inference-market"],
       "label": "AIM",
       "adapters": { "github": null },
+      "officer": "research",
+      "baseline": "active",
+      "next": "subtractoken",
+      "charter": ["scan", "report", "1pct", "launch"],
       "notes": "AI Inference Market / Well Spoken Token."
     },
     {
@@ -35,13 +53,21 @@
       "aliases": ["commons", "bellaOS-Commons"],
       "label": "Commons",
       "adapters": { "github": "michaelchaves-dev/bellaOS-Commons" },
-      "notes": "Shared board. Confirm repo name before write paths."
+      "officer": "commons",
+      "baseline": "active",
+      "next": "commons",
+      "charter": ["log", "reuse", "report"],
+      "notes": "Shared board. Confirm repo name before write paths. Board is standing; officer still reassignable if you name a successor."
     },
     {
       "id": "operator",
       "aliases": ["operator", "control-line"],
       "label": "Operator",
       "adapters": { "github": "michaelchaves-dev/Operator" },
+      "officer": "bella",
+      "baseline": "active",
+      "next": "zali",
+      "charter": ["scan", "report", "1pct", "launch"],
       "notes": "This plane."
     }
   ]
