@@ -4,11 +4,11 @@ from datetime import datetime, timezone
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+from intake import build_packet, format_packet
 from parser import AGENT_INDEX, PROJECT_INDEX, parse
 
-app = FastAPI(title="Operator gateway stub", version="0.1.0")
+app = FastAPI(title="Operator gateway stub", version="0.1.1")
 
-# Placeholder only. Real allowlist lives in env, never in git.
 ALLOW = {n.strip() for n in os.getenv("OPERATOR_ALLOWLIST", "+10000000000").split(",") if n.strip()}
 
 
@@ -47,7 +47,7 @@ def mock_status(agent_id: str, project_id: str | None) -> str:
 
 @app.get("/health")
 def health():
-    return {"ok": True, "mode": "stub-tier0"}
+    return {"ok": True, "mode": "stub-tier0", "intake": True}
 
 
 @app.post("/sms")
@@ -57,24 +57,24 @@ def sms(payload: SmsIn):
         return {"ok": False, "reply": "Unauthorized number."}
 
     parsed = parse(payload.body)
-    agent = AGENT_INDEX[parsed["agent"]]
-    project_id = parsed["project"]
+    packet = build_packet(parsed, sender=origin, mask="owner")
 
-    if project_id and agent["projects"] != ["*"] and project_id not in agent["projects"]:
+    if not packet["allowed"]:
         return {
             "ok": False,
             "parsed": parsed,
-            "reply": f"{agent['id']} is not on {project_id}.",
+            "intake": packet,
+            "reply": format_packet(packet),
         }
 
     if parsed["verb"] == "help":
-        reply = (
+        work = (
             "OPERATOR\n"
             "Text: @twin #zali status\n"
-            "Or: Operator, status on Operator\n"
-            "v0 is read-only mock status."
+            "Delivery: add 'email me' or 'text and email'. Voice is reserved."
         )
     else:
-        reply = mock_status(parsed["agent"], project_id)
+        work = mock_status(parsed["agent"], parsed["project"])
 
-    return {"ok": True, "parsed": parsed, "reply": reply}
+    reply = format_packet(packet) + "\n---\n" + work
+    return {"ok": True, "parsed": parsed, "intake": packet, "reply": reply}

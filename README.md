@@ -18,17 +18,31 @@ The phone number is an entrance, not the system. This repo is the plane.
 ```
 phone (SMS / talk-to-text)
   → identity allowlist
-  → intent + project
+  → intake checklist (every agent)
   → agent from registry
   → authority tier
   → adapter (GitHub first)
   → audit row
-  → SMS reply
+  → delivery (sms default; email optional; voice later)
 ```
 
 One human entry. Many agents. Many projects. Separate authority. Minimum privilege. Human final control. Full audit.
 
-GitHub is adapter one. Vercel, Drive, Commons, client stacks are later adapters. SMS, iMessage, Slack are later channels. Do not rebuild the plane for a new channel.
+GitHub is adapter one. Vercel, Drive, Commons, client stacks are later adapters. SMS, iMessage, Slack, voice are later channels. Do not rebuild the plane for a new channel.
+
+## Intake (all agents)
+
+Before tools, every role fills the same packet:
+
+WHO / REPO / ASK / TOTAL / AGENT / TIER / ALLOWED / DELIVER / WHEN / VOICE / APPROVAL
+
+Spec: `registry/intake-checklist.md`  
+Schema: `registry/intake.schema.json`  
+Stub builder: `gateway/intake.py`
+
+If a required cell is empty, ask one question. Do not guess a repo.
+
+Delivery codes: `sms` | `email` | `both` | `voice` (reserved — still replies by SMS in v0).
 
 ## Two masks, one gateway
 
@@ -39,10 +53,8 @@ GitHub is adapter one. Vercel, Drive, Commons, client stacks are later adapters.
 ```
 @twin #zali inspect retrieval
 @security #bellaOS status
-Operator, what are agents working on?
+Operator, status on Operator, email me when done
 ```
-
-Talk-to-text is sloppy. If a write is requested and no project is named, Operator asks one question. It does not guess a repo.
 
 ## Authority
 
@@ -57,31 +69,17 @@ Talk-to-text is sloppy. If a write is requested and no project is named, Operato
 
 Secrets never travel in SMS. Replies carry status, ids, and links. Patch bodies stay in the repo.
 
-## v0 (this commit)
+## v0 (this repo)
 
 Shipped:
 
 - this README
-- `registry/projects.json` — add/subtract projects here
-- `registry/agents.json` — add/subtract roles here
-- `gateway/` — stub webhook that parses a text and returns **mock Tier 0 status only**
+- `registry/projects.json`
+- `registry/agents.json`
+- `registry/intake-checklist.md` + `intake.schema.json`
+- `gateway/` stub: parse text → intake packet → mock Tier 0 status
 
-Not shipped:
-
-- live Twilio/Telnyx number
-- signed webhook verification
-- GitHub App
-- write paths
-- multi-channel
-- conversation memory beyond one parsed line
-
-## Registries
-
-Edit JSON. Do not invent a second control plane to add a worker.
-
-Projects use `adapters.github` when a repo exists. `null` means named but not wired.
-
-Agents declare `max_tier`, `projects` (`*` or ids), and tools. Operator (`bella`) is the default router.
+Not shipped: live number, GitHub App, writes, outbound email send, outbound voice.
 
 ## Run the stub
 
@@ -94,17 +92,18 @@ uvicorn app:app --reload --port 8080
 ```bash
 curl -s -X POST http://127.0.0.1:8080/sms \
   -H 'content-type: application/json' \
-  -d '{"from":"+10000000000","body":"@twin #zali status"}'
+  -d '{"sender":"+10000000000","body":"@twin #zali status email me"}'
 ```
 
-Allowlist in the stub is a placeholder. Put real numbers in env, never in git.
+Allowlist is env `OPERATOR_ALLOWLIST`. Never commit real numbers.
 
 ## Next reversible slices
 
-1. GitHub App, install on named repos, Tier 0 live status.
+1. GitHub App, named repos, live Tier 0 status.
 2. Signed provider webhook + number allowlist.
-3. Audit log file / table.
+3. Audit log.
 4. T2 approval tokens.
-5. Vercel adapter.
+5. Email delivery adapter (named inbox only).
+6. Voice channel (assigned / random pool) — after email works.
 
 One slice per gate.

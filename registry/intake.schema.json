@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://subtractarchitect.com/operator/intake.schema.json",
+  "title": "Operator intake packet",
+  "type": "object",
+  "required": [
+    "who",
+    "project_id",
+    "ask",
+    "total",
+    "agent_id",
+    "tier",
+    "allowed",
+    "deliver",
+    "when"
+  ],
+  "properties": {
+    "who": {
+      "type": "object",
+      "required": ["sender", "mask"],
+      "properties": {
+        "sender": { "type": "string" },
+        "mask": { "enum": ["owner", "client", "unknown"] }
+      }
+    },
+    "project_id": { "type": ["string", "null"] },
+    "repo": { "type": ["string", "null"] },
+    "ask": { "type": "string" },
+    "total": { "type": "array", "items": { "type": "string" } },
+    "agent_id": { "type": "string" },
+    "tier": { "type": "integer", "minimum": 0, "maximum": 3 },
+    "allowed": { "type": "boolean" },
+    "block_reason": { "type": ["string", "null"] },
+    "deliver": { "enum": ["sms", "email", "both", "voice"] },
+    "when": { "enum": ["now", "when-done", "scheduled"] },
+    "when_at": { "type": ["string", "null"] },
+    "voice": { "enum": ["none", "assigned", "random"] },
+    "voice_id": { "type": ["string", "null"] },
+    "approval_id": { "type": ["string", "null"] },
+    "missing": { "type": "array", "items": { "type": "string" } }
+  }
+}
