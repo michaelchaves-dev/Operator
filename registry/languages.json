@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "policy": "update-when-needed",
+  "languages": [
+    {
+      "id": "en-US-ne",
+      "family": "english",
+      "market_lane": "us-new-england",
+      "variant": "general US English",
+      "status": "live",
+      "officer": "marci",
+      "notes": "v0 Marci desk language."
+    },
+    {
+      "id": "es-US",
+      "family": "spanish",
+      "market_lane": "us-new-england",
+      "variant": "US Spanish leasing desk",
+      "status": "planned",
+      "officer": "marci",
+      "notes": "Next NE add-on. Not a new gateway."
+    },
+    {
+      "id": "pt-BR",
+      "family": "portuguese",
+      "market_lane": "brazil",
+      "variant": "unspecified BR — split before live",
+      "status": "research",
+      "officer": "marci",
+      "notes": "Brazil is a marketing lane. Dialects get their own rows before live."
+    },
+    {
+      "id": "ga-IE",
+      "family": "goidelic",
+      "market_lane": "ireland",
+      "variant": "Irish",
+      "status": "research",
+      "officer": "marci",
+      "notes": "Hard-language seat. Gold desk phrases first."
+    },
+    {
+      "id": "gd-GB",
+      "family": "goidelic",
+      "market_lane": "scotland",
+      "variant": "Scottish Gaelic",
+      "status": "research",
+      "officer": "marci",
+      "notes": "Hard-language seat. Do not mix with Irish."
+    }
+  ]
+}
