@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q0 card</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; font: 16px/1.4 system-ui, sans-serif; background: #111; color: #eee; }
+    main { max-width: 40rem; margin: 0 auto; padding: 1.5rem; }
+    h1 { font-size: 1.25rem; font-weight: 600; }
+    p { color: #ccc; }
+    fieldset { border: 1px solid #333; margin: 0 0 1rem; padding: 0.75rem 1rem; }
+    legend { padding: 0 0.4rem; color: #fff; }
+    label { display: block; margin: 0.25rem 0; }
+    button { background: #eee; color: #111; border: 0; padding: 0.5rem 0.9rem; font: inherit; }
+    pre { background: #1a1a1a; padding: 0.75rem; overflow: auto; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Q0 card</h1>
+    <p>Before any tool. Closed only. Zero open-ended questions.</p>
+    <form id="q0">
+      <fieldset>
+        <legend>WHAT</legend>
+        <input name="what" placeholder="topic" autocomplete="off">
+      </fieldset>
+      <fieldset>
+        <legend>WHERE</legend>
+        <label><input type="radio" name="where" value="A"> A chat</label>
+        <label><input type="radio" name="where" value="B"> B repo</label>
+        <label><input type="radio" name="where" value="C"> C Drive</label>
+        <label><input type="radio" name="where" value="D"> D phone</label>
+        <label><input type="radio" name="where" value="E"> E other</label>
+      </fieldset>
+      <fieldset>
+        <legend>DO</legend>
+        <label><input type="radio" name="do" value="A"> A write</label>
+        <label><input type="radio" name="do" value="B"> B read</label>
+        <label><input type="radio" name="do" value="C"> C brainstorm (no write)</label>
+        <label><input type="radio" name="do" value="D"> D status</label>
+      </fieldset>
+      <fieldset>
+        <legend>WHEN</legend>
+        <label><input type="radio" name="when" value="A"> A now</label>
+        <label><input type="radio" name="when" value="B"> B later</label>
+        <label><input type="radio" name="when" value="C"> C skip</label>
+      </fieldset>
+      <fieldset>
+        <legend>PARTICULAR</legend>
+        <label><input type="radio" name="particular" value="A"> A none</label>
+        <label><input type="radio" name="particular" value="B"> B constraint</label>
+        <input name="constraint" placeholder="one constraint if B">
+      </fieldset>
+      <p><button type="submit">Lock</button></p>
+    </form>
+    <pre id="out"></pre>
+  </main>
+  <script>
+    document.getElementById('q0').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = e.target;
+      var card = {
+        what: f.what.value.trim() || null,
+        where: (f.where.value || null),
+        do: (f.do.value || null),
+        when: (f.when.value || null),
+        particular: f.particular.value || null,
+        constraint: f.constraint.value.trim() || null
+      };
+      document.getElementById('out').textContent = JSON.stringify(card, null, 2);
+    });
+  </script>
+</body>
+</html>
