@@ -89,7 +89,15 @@ Slice 0 (2026-10-26, branch `slice-0-roman-tier0`):
 - `gateway/github_status.py`: Tier 0 status is now a **live GitHub API read**, not a mock. Public repos need no token; private repos read an optional `GITHUB_TOKEN` / `GH_TOKEN` from the gateway environment only (never committed, never logged). If GitHub cannot be reached or auth is missing, the reply says so honestly — no fabricated numbers.
 - Tests: `gateway/test_slice0.py`.
 
-Not shipped: live number, GitHub App, writes, outbound email send, outbound voice.
+Slice 1 scaffold (2026-10-26, branch `slice-1-provider-webhook`, stacked on Slice 0):
+
+- `gateway/providers.py`: signed provider webhooks — Twilio (HMAC-SHA1) and Telnyx (Ed25519), failing closed when no signing secret is configured.
+- `POST /webhook/twilio` (TwiML reply) and `POST /webhook/telnyx` (API reply) feed the same intake plane as `POST /sms`.
+- `gateway/audit.py`: JSONL audit row per message (masked sender, no bodies, no secrets).
+- `POST /notify`: Operator texts the owner — notify-token gated, recipients hard-restricted to the allowlist.
+- Deploy scaffold: `gateway/Procfile`, `railway.json`, `gateway/.env.example`, and `docs/SLICE1-RUNBOOK.md` (the remaining steps are all Michael's: account, number, host env, webhook URL).
+
+Not shipped: live number (none bought, $0 spent), GitHub App, writes, outbound email send, outbound voice.
 
 ## Run the stub
 
