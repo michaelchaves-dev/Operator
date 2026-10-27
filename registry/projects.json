@@ -8,12 +8,12 @@
       "id": "bellaos",
       "aliases": ["bellaOS", "bella-os"],
       "label": "bellaOS",
-      "adapters": { "github": null },
+      "adapters": { "github": "michaelchaves-dev/bellaOS" },
       "officer": "bella",
       "baseline": "active",
       "next": "operator",
       "charter": ["scan", "report", "1pct", "launch"],
-      "notes": "Core OS / agent plane. Wire repo when ready."
+      "notes": "Core OS / agent plane. GitHub adapter wired Slice 0, 2026-10-26 to michaelchaves-dev/bellaOS (the Constitutional Cognitive OS repo) — not bellaOS_Pro, which is a separate repo."
     },
     {
       "id": "zali",
@@ -30,7 +30,7 @@
       "id": "subtractoken",
       "aliases": ["SubtracToken", "subtractoken"],
       "label": "SubtracToken",
-      "adapters": { "github": null },
+      "adapters": { "github": "michaelchaves-dev/subtractoken-router" },
       "officer": "coder",
       "baseline": "active",
       "next": "zali",
@@ -41,7 +41,7 @@
       "id": "aim",
       "aliases": ["AIM", "ai-inference-market"],
       "label": "AIM",
-      "adapters": { "github": null },
+      "adapters": { "github": "michaelchaves-dev/AIM" },
       "officer": "research",
       "baseline": "active",
       "next": "subtractoken",
