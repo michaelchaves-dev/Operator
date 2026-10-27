@@ -53,8 +53,11 @@ Delivery codes: `sms` | `email` | `both` | `voice` (reserved — still replies b
 ```
 @twin #zali inspect retrieval
 @security #bellaOS status
+@roman #operator status
 Operator, status on Operator, email me when done
 ```
+
+**Roman** (`@roman` / `@rome`) joined the roster in Slice 0 (2026-10-26, owner's direction): Michael's Muse operating partner as owner-face supervisor — projects `*`, Tier 2 ceiling, branch / proposed-patch writes only behind `APPROVE <id>`, no merge and no deploy. Bella remains the default router/desk.
 
 ## Authority
 
@@ -79,6 +82,13 @@ Shipped:
 - `registry/intake-checklist.md` + `intake.schema.json`
 - `gateway/` stub: parse text → intake packet → mock Tier 0 status
 
+Slice 0 (2026-10-26, branch `slice-0-roman-tier0`):
+
+- Roman added to `registry/agents.json` (see above).
+- GitHub adapters wired in `registry/projects.json` for #aim, #subtractoken, and #bellaos (exact repos verified; #zali stays unwired — two candidate repos, no guessing).
+- `gateway/github_status.py`: Tier 0 status is now a **live GitHub API read**, not a mock. Public repos need no token; private repos read an optional `GITHUB_TOKEN` / `GH_TOKEN` from the gateway environment only (never committed, never logged). If GitHub cannot be reached or auth is missing, the reply says so honestly — no fabricated numbers.
+- Tests: `gateway/test_slice0.py`.
+
 Not shipped: live number, GitHub App, writes, outbound email send, outbound voice.
 
 ## Run the stub
@@ -92,7 +102,7 @@ uvicorn app:app --reload --port 8080
 ```bash
 curl -s -X POST http://127.0.0.1:8080/sms \
   -H 'content-type: application/json' \
-  -d '{"sender":"+10000000000","body":"@twin #zali status email me"}'
+  -d '{"sender":"+10000000000","body":"@roman #operator status"}'
 ```
 
 Allowlist is env `OPERATOR_ALLOWLIST`. Never commit real numbers.

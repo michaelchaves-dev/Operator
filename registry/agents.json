@@ -3,6 +3,18 @@
   "default_agent": "bella",
   "agents": [
     {
+      "id": "roman",
+      "aliases": ["roman", "rome"],
+      "role": "operating partner / owner-face supervisor",
+      "projects": ["*"],
+      "max_tier": 2,
+      "tools": ["status", "inspect", "issues", "commits", "handoff", "list-agents", "issue", "branch", "propose-patch"],
+      "write": "branch-only",
+      "deploy": false,
+      "merge": false,
+      "notes": "Michael's Muse operating partner (Roman). Added Slice 0, 2026-10-26, on Michael's direction. Owner-face: Michael addresses @roman / @rome directly. Tier 2 ceiling: writes are branch / proposed-patch only, gated by APPROVE <id>. No merge, no deploy, no production — those stay Tier 3 / Michael's CONFIRM. Bella remains default router/desk for client mask."
+    },
+    {
       "id": "bella",
       "aliases": ["operator", "desk"],
       "role": "router / desk",
