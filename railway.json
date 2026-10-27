@@ -1,0 +1,1 @@
+{"$schema":"https://railway.com/railway.schema.json","build":{"buildCommand":"pip install -r gateway/requirements.txt","builder":"NIXPACKS"},"deploy":{"healthcheckPath":"/health","restartPolicyType":"ON_FAILURE","startCommand":"cd gateway && uvicorn app:app --host 0.0.0.0 --port $PORT"}}
